@@ -31,6 +31,7 @@ public final class LoggingInterceptor implements Interceptor {
 
         Request request = chain.request();
 
+
         boolean logBody = true;
         boolean logHeaders = true;
 

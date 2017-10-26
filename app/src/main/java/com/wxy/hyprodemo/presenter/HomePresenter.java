@@ -24,8 +24,23 @@ public class HomePresenter extends IBasePresenter<HomeView> {
     }
     public void getHomePageData(String dictid ){
         mIView.showLoading();
-        Observable.interval(2, TimeUnit.SECONDS).subscribe(f->{
+        Observable.timer(2, TimeUnit.SECONDS).subscribe(f->{
             HYNetManager.getInstance().getHomePageData(dictid,"1","0","2")
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(info->{
+                        mIView.showSuccess(info);
+                    },error->{
+                        mIView.showError(error.getMessage());
+                    });
+        });
+
+    }
+
+    public void getPm(){
+        mIView.showLoading();
+        Observable.timer(2, TimeUnit.SECONDS).subscribe(f->{
+            HYNetManager.getInstance().getPm("18272939309","asd123456")
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(info->{

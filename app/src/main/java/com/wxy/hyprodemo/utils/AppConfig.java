@@ -9,5 +9,6 @@ package com.wxy.hyprodemo.utils;
 *  Description: This is AppConfig   
 */
 public class AppConfig {
-    public static final String SERVER_URL_INIT_1 = "http://116.62.45.175:8089";
+//    public static final String SERVER_URL_INIT_1 = "http://116.62.45.175:8089";
+public static final String SERVER_URL_INIT_1 = "http://dev.hidaishu.com";
 }

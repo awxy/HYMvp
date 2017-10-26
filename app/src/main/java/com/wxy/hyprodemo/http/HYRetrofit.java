@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 网络请求对象
@@ -23,9 +22,9 @@ public class HYRetrofit implements Serializable {
     // init初次尝试连接5s，失败后第二次尝试连接10s，第三次连接150s
     public static final long connectTimeout_5 = 5;
     public static final long connectTimeout_10 = 10;
-    public static final long connectTimeout_150 = 150;
+    public static final long connectTimeout_150 = 4;
     // NOTE:后端设置超时时间2分半
-    public static final long readTimeout_150 = 150;
+//    public static final long readTimeout_150 = 150;
 
     private static HYRetrofit sInstance;
     private static Retrofit.Builder sBuilder;
@@ -53,10 +52,11 @@ public class HYRetrofit implements Serializable {
         if (BuildConfig.DEBUG) {
             // print Log
             sOkHttpBuilder.addInterceptor(new LoggingInterceptor());
+//            sOkHttpBuilder.addInterceptor(new MyInterceptor());
         }
 
         sOkHttpBuilder.retryOnConnectionFailure(false);
-        sOkHttpBuilder.readTimeout(readTimeout_150, TimeUnit.SECONDS);
+        sOkHttpBuilder.readTimeout(connectTimeout_150, TimeUnit.SECONDS);
         sOkHttpBuilder.connectTimeout(connectTimeout_150, TimeUnit.SECONDS);
         sClient = sOkHttpBuilder.build();
 
@@ -90,7 +90,7 @@ public class HYRetrofit implements Serializable {
                     Retrofit retrofit = sBuilder
                             .client(sClient)
                             .baseUrl(serverUrl + "/")
-                            .addConverterFactory(GsonConverterFactory.create())
+                            .addConverterFactory(new JsonConverterFactory())
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .build();
                     sNetApi = retrofit.create(HYNetManager.HYNetApi.class);
@@ -103,6 +103,9 @@ public class HYRetrofit implements Serializable {
     public static HYNetManager.HYNetApi getNetApiInstance() {
         return getNetApiInstance(AppConfig.SERVER_URL_INIT_1);
     }
+
+
+
 }
 
 

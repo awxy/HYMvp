@@ -75,7 +75,8 @@ public class HomeFragment extends HYFragmentBase<HomePresenter> implements HomeV
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         recyclerView.setAdapter(mAdapter);
         //首页请求
-        mPresenter.getHomePageData(mDictid);
+//        mPresenter.getHomePageData(mDictid);
+        mPresenter.getPm();
     }
 
     @Override
@@ -84,9 +85,14 @@ public class HomeFragment extends HYFragmentBase<HomePresenter> implements HomeV
     }
 
     @Override
-    public void showSuccess(HomePageInfo info) {
-        mAdapter.addData(info.getResult().getZhibo());
-        mAdapter.notifyDataSetChanged();
+    public void showSuccess(Object info) {
+        if(info instanceof HomePageInfo){
+            mAdapter.addData(((HomePageInfo)info).getResult().getZhibo());
+            mAdapter.notifyDataSetChanged();
+        }else{
+
+        }
+
         pbLoading.setVisibility(View.GONE);
     }
 

@@ -1,7 +1,5 @@
 package com.wxy.hyprodemo.iView;
 
-import com.wxy.hyprodemo.bean.HomePageInfo;
-
 /**
  * Created by Administrator on 2017/10/25.
  */
@@ -12,6 +10,6 @@ import com.wxy.hyprodemo.bean.HomePageInfo;
 */
 public interface HomeView extends IBaseView{
     void showLoading();
-    void showSuccess(HomePageInfo info);
+    void showSuccess(Object info);
     void showError(String msg);
 }

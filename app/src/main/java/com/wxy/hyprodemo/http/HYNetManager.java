@@ -2,6 +2,7 @@ package com.wxy.hyprodemo.http;
 
 import com.wxy.hyprodemo.bean.HomePageInfo;
 import com.wxy.hyprodemo.bean.MainPageInfo;
+import com.wxy.hyprodemo.bean.PMInfo;
 
 import java.io.Serializable;
 
@@ -28,12 +29,21 @@ public final class HYNetManager implements Serializable {
         @POST("Api/TAdvert/gethomeAdvert")
         @FormUrlEncoded
         Observable<HomePageInfo> getHomePageData(@Field("dictid")String dictid,@Field("p")String p,@Field("classifyid")String classifyid,@Field("alocation")String alocation);
+
+        @POST("interface/v1.5/login")
+        @FormUrlEncoded
+        Observable<PMInfo> getPm(@Field("PhoneNumber")String phoneNumber,@Field("PassWord")String PassWord);
+
+
     }
     public Observable<MainPageInfo> getMainPageData(String dictid,String p ,String classifyid,String alocation){
         return sApi.getMainPageData(dictid,p,classifyid,alocation);
     }
     public Observable<HomePageInfo> getHomePageData(String dictid, String p , String classifyid, String alocation){
         return sApi.getHomePageData(dictid,p,classifyid,alocation);
+    }
+    public Observable<PMInfo> getPm(String phoneNumber, String passWord){
+        return sApi.getPm(phoneNumber,passWord);
     }
     public static HYNetManager getInstance(){
         if(sInstance == null){
