@@ -109,6 +109,9 @@ public abstract class HYFragmentBase<T extends IBasePresenter> extends RxFragmen
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);//解绑
+        if(mPresenter!=null){
+            mPresenter.release();
+        }
     }
 
     @Override

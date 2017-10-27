@@ -1,7 +1,10 @@
 package com.wxy.hyprodemo.presenter;
 
+import com.wxy.hyprodemo.bean.PMInfo;
+import com.wxy.hyprodemo.http.BaseSubscriber;
 import com.wxy.hyprodemo.http.HYNetManager;
 import com.wxy.hyprodemo.iView.HomeView;
+import com.wxy.hyprodemo.utils.LogUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,37 +25,61 @@ public class HomePresenter extends IBasePresenter<HomeView> {
     public HomePresenter(HomeView iView) {
         super(iView);
     }
-    public void getHomePageData(String dictid ){
+
+    public void getHomePageData(String dictid) {
         mIView.showLoading();
-        Observable.timer(2, TimeUnit.SECONDS).subscribe(f->{
-            HYNetManager.getInstance().getHomePageData(dictid,"1","0","2")
+        Observable.timer(2, TimeUnit.SECONDS).subscribe(f -> {
+            HYNetManager.getInstance().getHomePageData(dictid, "1", "0", "2")
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(info->{
+                    .subscribe(info -> {
                         mIView.showSuccess(info);
-                    },error->{
+                    }, error -> {
                         mIView.showError(error.getMessage());
                     });
         });
 
     }
 
-    public void getPm(){
+    public void getPm() {
         mIView.showLoading();
-        Observable.timer(2, TimeUnit.SECONDS).subscribe(f->{
-            HYNetManager.getInstance().getPm("18272939309","asd123456")
+//        Observable.timer(2, TimeUnit.SECONDS).subscribe(f-> {
+//            HYNetManager.getInstance().getPm("18272939309", "asd123456")
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+////                    .subscribe(info->{
+////                        mIView.showSuccess(info);
+////                    },error->{
+////                        mIView.showError(error.getMessage());
+////                    });
+//                .subscribe();
+        ;
+        Observable.timer(2, TimeUnit.SECONDS).subscribe(f -> {
+            HYNetManager.getInstance().getPm("18272939309", "asd123456")
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(info->{
-                        mIView.showSuccess(info);
-                    },error->{
-                        mIView.showError(error.getMessage());
+                    .subscribe(new BaseSubscriber<PMInfo>(this) {
+                        @Override
+                        public void noData(String msg) {
+                            LogUtils.d("data","nodata");
+                        }
+
+                        @Override
+                        public void onSuccess(PMInfo info) {
+                            LogUtils.d("data","success");
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
                     });
+
+
         });
-
     }
-    @Override
-    public void release() {
+        @Override
+        public void release () {
 
+        }
     }
-}

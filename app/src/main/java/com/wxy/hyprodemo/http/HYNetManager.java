@@ -32,7 +32,7 @@ public final class HYNetManager implements Serializable {
 
         @POST("interface/v1.5/login")
         @FormUrlEncoded
-        Observable<PMInfo> getPm(@Field("PhoneNumber")String phoneNumber,@Field("PassWord")String PassWord);
+        Observable<PMInfo> getPm(@Field("PhoneNumber")String phoneNumber, @Field("PassWord")String PassWord);
 
 
     }

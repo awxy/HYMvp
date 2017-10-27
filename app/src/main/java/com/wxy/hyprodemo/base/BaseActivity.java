@@ -31,7 +31,7 @@ public abstract class BaseActivity<T extends IBasePresenter> extends RxAppCompat
 
     protected T mPresenter;
 
-    protected abstract T initPresenter();
+    protected abstract void initPresenter();
 
     protected abstract int getContentId();
 
@@ -39,7 +39,7 @@ public abstract class BaseActivity<T extends IBasePresenter> extends RxAppCompat
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentId());
-        mPresenter = initPresenter();
+        initPresenter();
         ButterKnife.bind(this);
     }
     /*

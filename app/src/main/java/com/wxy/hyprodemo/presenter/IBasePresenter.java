@@ -1,8 +1,9 @@
 package com.wxy.hyprodemo.presenter;
 
+import com.wxy.hyprodemo.http.BaseSubscriber;
 import com.wxy.hyprodemo.iView.IBaseView;
 
-import rx.Subscription;
+import java.util.ArrayList;
 /*
 *  Author: Wxy
 *  Time:   2017/10/25   14:36
@@ -10,8 +11,8 @@ import rx.Subscription;
 */
 
 public abstract class IBasePresenter<T extends IBaseView> {
+    public ArrayList<BaseSubscriber> subscribers = new ArrayList<>();
 
-    protected Subscription mSubscription;
     protected T mIView;
 
     public IBasePresenter(T iView) {
@@ -25,6 +26,12 @@ public abstract class IBasePresenter<T extends IBaseView> {
     /**
      * Presenter释放资源
      */
-    public abstract void release();
+    public  void release(){
+        for(BaseSubscriber subscriber : subscribers){
+            if(subscriber!=null){
+                subscriber.unsubscribe();
+            }
+        }
+    };
 
 }

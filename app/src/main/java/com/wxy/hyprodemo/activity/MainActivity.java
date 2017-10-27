@@ -9,14 +9,13 @@ import com.wxy.hyprodemo.R;
 import com.wxy.hyprodemo.base.BaseActivity;
 import com.wxy.hyprodemo.fragment.HomeFragment;
 import com.wxy.hyprodemo.iView.IBaseView;
-import com.wxy.hyprodemo.presenter.IBasePresenter;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements IBaseView{
 
-
+    String json = "{\"key\":{}}";
 
     @Bind(R.id.fl_content)
     FrameLayout fl_content;
@@ -33,11 +32,11 @@ public class MainActivity extends BaseActivity implements IBaseView{
 
 
     @Override
-    protected IBasePresenter initPresenter() {
+    protected void initPresenter() {
         //如果不需要Presenter  return null
         //手动调用 initView()
         initView();
-        return null;
+
     }
 
     @Override
