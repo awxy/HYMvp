@@ -58,15 +58,15 @@ public class HomePresenter extends IBasePresenter<HomeView> {
             HYNetManager.getInstance().getPm("18272939309", "asd123456")
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseSubscriber<PMInfo>(this) {
+                    .subscribe(new BaseSubscriber<PMInfo>() {
                         @Override
                         public void noData(String msg) {
-                            LogUtils.d("data","nodata");
+                            LogUtils.e("data", "nodata");
                         }
 
                         @Override
                         public void onSuccess(PMInfo info) {
-                            LogUtils.d("data","success");
+                            LogUtils.e("data", "success");
                         }
 
                         @Override
@@ -78,8 +78,5 @@ public class HomePresenter extends IBasePresenter<HomeView> {
 
         });
     }
-        @Override
-        public void release () {
 
-        }
-    }
+}

@@ -3,11 +3,11 @@ package com.wxy.hyprodemo.base;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Toast;
 
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.wxy.hyprodemo.presenter.IBasePresenter;
 import com.zhy.autolayout.AutoFrameLayout;
 import com.zhy.autolayout.AutoLinearLayout;
@@ -21,9 +21,9 @@ import butterknife.ButterKnife;
 /*
 *  Author: Wxy
 *  Time:   2017/10/25   15:24
-*  Description: This is BaseActivity   
+*  Description: This is BaseActivity
 */
-public abstract class BaseActivity<T extends IBasePresenter> extends RxAppCompatActivity{
+public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatActivity {
     //适配
     private static final String LAYOUT_LINEARLAYOUT = "LinearLayout";
     private static final String LAYOUT_FRAMELAYOUT = "FrameLayout";

@@ -1,9 +1,8 @@
 package com.wxy.hyprodemo.presenter;
 
-import com.wxy.hyprodemo.http.BaseSubscriber;
 import com.wxy.hyprodemo.iView.IBaseView;
 
-import java.util.ArrayList;
+import rx.subscriptions.CompositeSubscription;
 /*
 *  Author: Wxy
 *  Time:   2017/10/25   14:36
@@ -11,27 +10,34 @@ import java.util.ArrayList;
 */
 
 public abstract class IBasePresenter<T extends IBaseView> {
-    public ArrayList<BaseSubscriber> subscribers = new ArrayList<>();
-
+//    public CopyOnWriteArrayList<BaseSubscriber> subscribers = new CopyOnWriteArrayList<>();
+protected CompositeSubscription subscribers;//管理所有的订阅
     protected T mIView;
 
     public IBasePresenter(T iView) {
         mIView = iView;
+        this.subscribers = new CompositeSubscription();
     }
 
-    public void init(){
+    public void init() {
         mIView.initView();
     }
 
     /**
      * Presenter释放资源
      */
-    public  void release(){
-        for(BaseSubscriber subscriber : subscribers){
-            if(subscriber!=null){
-                subscriber.unsubscribe();
-            }
-        }
-    };
+    public void release() {
+//        for (BaseSubscriber subscriber : subscribers) {
+//            if (subscriber != null) {
+//                subscriber.unsubscribe();
+//            }
+//        }
+        if(subscribers!=null)
+            subscribers.unsubscribe();
+        if (mIView != null)
+            mIView = null;
+    }
+
+    ;
 
 }

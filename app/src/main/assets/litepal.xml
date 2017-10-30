@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <!-- 数据库名-->
+    <dbname value="demo" />
+
+    <!--版本号-->
+    <version value="6" />
+
+    <!--
+    	表映射
+    	<list>
+    		<mapping class="com.test.model.Reader" />
+    		<mapping class="com.test.model.Magazine" />
+    	</list>
+    -->
+    <list>
+        <mapping class="com.wxy.hyprodemo.db.News" />
+        <mapping class="com.wxy.hyprodemo.db.Content" />
+    </list>
+</litepal>

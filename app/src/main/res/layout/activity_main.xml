@@ -14,7 +14,8 @@
             android:layout_width="384px"
             android:layout_height="wrap_content" />
         <Button
-            android:text="RIGHT"
+            android:id="@+id/btn_db"
+            android:text="Create_table"
             android:background="@android:color/holo_red_dark"
             android:layout_width="384px"
             android:layout_height="wrap_content" />
